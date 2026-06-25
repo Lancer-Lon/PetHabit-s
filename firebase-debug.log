@@ -1,0 +1,167 @@
+[debug] [2026-06-25T16:45:22.024Z] ----------------------------------------------------------------------
+[debug] [2026-06-25T16:45:22.027Z] Command:       /Users/nikitamechkaev/.nvm/versions/node/v24.17.0/bin/node /Users/nikitamechkaev/.nvm/versions/node/v24.17.0/bin/firebase login --no-localhost
+[debug] [2026-06-25T16:45:22.027Z] CLI Version:   15.22.2
+[debug] [2026-06-25T16:45:22.027Z] Platform:      darwin
+[debug] [2026-06-25T16:45:22.028Z] Node Version:  v24.17.0
+[debug] [2026-06-25T16:45:22.028Z] Detected Agent: unknown
+[debug] [2026-06-25T16:45:22.028Z] Time:          Thu Jun 25 2026 20:45:22 GMT+0400 (Самарское стандартное время)
+[debug] [2026-06-25T16:45:22.028Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  The Firebase CLI’s MCP server feature can optionally make use of Gemini in Firebase. Learn more about Gemini in Firebase and how it uses your data: https://firebase.google.com/docs/gemini-in-firebase#how-gemini-in-firebase-uses-your-data 
+[info] 
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you. 
+[info] 
+[info] i  To change your preferences at any time, run `firebase logout` and `firebase login` again. 
+[debug] [2026-06-25T16:45:34.814Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2026-06-25T16:45:34.814Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"248cb43f-42d1-48d0-9398-bf1db1113004"}
+[debug] [2026-06-25T16:45:35.898Z] <<< [apiv2][status] POST https://auth.firebase.tools/attest 200
+[debug] [2026-06-25T16:45:35.898Z] <<< [apiv2][body] POST https://auth.firebase.tools/attest {"token":"FDXATH4txRTkGxnch1Pf-24t4sNPHRdZPPWdood9N6M"}
+[info] 
+[info] To sign in to the Firebase CLI:
+[info] 
+[info] 1. Take note of your session ID:
+[info] 
+[info]    248CB
+[info] 
+[info] 2. Visit the URL below on any device and follow the instructions to get your code:
+[info] 
+[info]    https://auth.firebase.tools/login?code_challenge=A6AEugvD_-5Ovsd5EigkkoDlo824xudK1GIW-bHLYyc&session=248cb43f-42d1-48d0-9398-bf1db1113004&attest=FDXATH4txRTkGxnch1Pf-24t4sNPHRdZPPWdood9N6M
+[info] 
+[info] 3. Paste or enter the authorization code below once you have it:
+[info] 
+[debug] [2026-06-25T16:46:09.649Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (/Users/nikitamechkaev/.nvm/versions/node/v24.17.0/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:101:37)
+    at Interface.emit (node:events:509:28)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1327:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:284:20)
+    at ReadStream.emit (node:events:521:24)
+    at emitKeys (node:internal/readline/utils:371:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+    at ReadStream.emit (node:events:509:28)
+    at addChunk (node:internal/streams/readable:563:12)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-06-25T16:47:33.733Z] ----------------------------------------------------------------------
+[debug] [2026-06-25T16:47:33.736Z] Command:       /Users/nikitamechkaev/.nvm/versions/node/v24.17.0/bin/node /Users/nikitamechkaev/.nvm/versions/node/v24.17.0/bin/firebase login --no-localhost
+[debug] [2026-06-25T16:47:33.737Z] CLI Version:   15.22.2
+[debug] [2026-06-25T16:47:33.737Z] Platform:      darwin
+[debug] [2026-06-25T16:47:33.737Z] Node Version:  v24.17.0
+[debug] [2026-06-25T16:47:33.737Z] Detected Agent: unknown
+[debug] [2026-06-25T16:47:33.737Z] Time:          Thu Jun 25 2026 20:47:33 GMT+0400 (Самарское стандартное время)
+[debug] [2026-06-25T16:47:33.737Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  The Firebase CLI’s MCP server feature can optionally make use of Gemini in Firebase. Learn more about Gemini in Firebase and how it uses your data: https://firebase.google.com/docs/gemini-in-firebase#how-gemini-in-firebase-uses-your-data 
+[info] 
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you. 
+[info] 
+[info] i  To change your preferences at any time, run `firebase logout` and `firebase login` again. 
+[debug] [2026-06-25T16:47:37.221Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2026-06-25T16:47:37.221Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"9d3a93ef-b962-4c2b-986e-58d0c2c86c62"}
+[debug] [2026-06-25T16:47:38.199Z] <<< [apiv2][status] POST https://auth.firebase.tools/attest 200
+[debug] [2026-06-25T16:47:38.199Z] <<< [apiv2][body] POST https://auth.firebase.tools/attest {"token":"IUQsEfpCl8wHZLo3-MUY07Z1AeXA88L0FKgTPQ1FB3g"}
+[info] 
+[info] To sign in to the Firebase CLI:
+[info] 
+[info] 1. Take note of your session ID:
+[info] 
+[info]    9D3A9
+[info] 
+[info] 2. Visit the URL below on any device and follow the instructions to get your code:
+[info] 
+[info]    https://auth.firebase.tools/login?code_challenge=eMZIsSYc1QNRmZs1awDgzXiF5TBPA3fTGqWe0kMVLCg&session=9d3a93ef-b962-4c2b-986e-58d0c2c86c62&attest=IUQsEfpCl8wHZLo3-MUY07Z1AeXA88L0FKgTPQ1FB3g
+[info] 
+[info] 3. Paste or enter the authorization code below once you have it:
+[info] 
+[debug] [2026-06-25T16:48:48.409Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (/Users/nikitamechkaev/.nvm/versions/node/v24.17.0/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:101:37)
+    at Interface.emit (node:events:509:28)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1327:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:284:20)
+    at ReadStream.emit (node:events:521:24)
+    at emitKeys (node:internal/readline/utils:371:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+    at ReadStream.emit (node:events:509:28)
+    at addChunk (node:internal/streams/readable:563:12)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-06-25T16:48:50.549Z] ----------------------------------------------------------------------
+[debug] [2026-06-25T16:48:50.552Z] Command:       /Users/nikitamechkaev/.nvm/versions/node/v24.17.0/bin/node /Users/nikitamechkaev/.nvm/versions/node/v24.17.0/bin/firebase login --reauth --no-localhost
+[debug] [2026-06-25T16:48:50.553Z] CLI Version:   15.22.2
+[debug] [2026-06-25T16:48:50.553Z] Platform:      darwin
+[debug] [2026-06-25T16:48:50.553Z] Node Version:  v24.17.0
+[debug] [2026-06-25T16:48:50.553Z] Detected Agent: unknown
+[debug] [2026-06-25T16:48:50.553Z] Time:          Thu Jun 25 2026 20:48:50 GMT+0400 (Самарское стандартное время)
+[debug] [2026-06-25T16:48:50.554Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-06-25T16:48:50.567Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2026-06-25T16:48:50.567Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"2d394658-b84e-4574-9881-e5958433768f"}
+[debug] [2026-06-25T16:48:51.554Z] <<< [apiv2][status] POST https://auth.firebase.tools/attest 200
+[debug] [2026-06-25T16:48:51.554Z] <<< [apiv2][body] POST https://auth.firebase.tools/attest {"token":"mH78DF6CYI56eNZs5G8xIxHv7zthpIb_4PwHri4Xk-A"}
+[info] 
+[info] To sign in to the Firebase CLI:
+[info] 
+[info] 1. Take note of your session ID:
+[info] 
+[info]    2D394
+[info] 
+[info] 2. Visit the URL below on any device and follow the instructions to get your code:
+[info] 
+[info]    https://auth.firebase.tools/login?code_challenge=dNqnzBduCxkxcQMvFUm_rIo_Lc9z6jX5WJSuIOIGIgs&session=2d394658-b84e-4574-9881-e5958433768f&attest=mH78DF6CYI56eNZs5G8xIxHv7zthpIb_4PwHri4Xk-A
+[info] 
+[info] 3. Paste or enter the authorization code below once you have it:
+[info] 
+[debug] [2026-06-25T16:49:16.751Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (/Users/nikitamechkaev/.nvm/versions/node/v24.17.0/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:101:37)
+    at Interface.emit (node:events:509:28)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1327:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:284:20)
+    at ReadStream.emit (node:events:521:24)
+    at emitKeys (node:internal/readline/utils:371:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+    at ReadStream.emit (node:events:509:28)
+    at addChunk (node:internal/streams/readable:563:12)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-06-25T16:50:22.375Z] ----------------------------------------------------------------------
+[debug] [2026-06-25T16:50:22.379Z] Command:       /Users/nikitamechkaev/.nvm/versions/node/v24.17.0/bin/node /Users/nikitamechkaev/.nvm/versions/node/v24.17.0/bin/firebase login:ci --no-localhost
+[debug] [2026-06-25T16:50:22.379Z] CLI Version:   15.22.2
+[debug] [2026-06-25T16:50:22.379Z] Platform:      darwin
+[debug] [2026-06-25T16:50:22.379Z] Node Version:  v24.17.0
+[debug] [2026-06-25T16:50:22.379Z] Detected Agent: unknown
+[debug] [2026-06-25T16:50:22.380Z] Time:          Thu Jun 25 2026 20:50:22 GMT+0400 (Самарское стандартное время)
+[debug] [2026-06-25T16:50:22.380Z] ----------------------------------------------------------------------
+[debug] 
+[warn] ⚠  Authenticating with a `login:ci` token is deprecated and will be removed in a future major version of `firebase-tools`. Instead, use a service account key with `GOOGLE_APPLICATION_CREDENTIALS`: https://cloud.google.com/docs/authentication/getting-started 
+[debug] [2026-06-25T16:50:22.394Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2026-06-25T16:50:22.394Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"774be413-9083-4395-84d3-67d48801f5f3"}
+[debug] [2026-06-25T16:50:23.402Z] <<< [apiv2][status] POST https://auth.firebase.tools/attest 200
+[debug] [2026-06-25T16:50:23.403Z] <<< [apiv2][body] POST https://auth.firebase.tools/attest {"token":"DrU6-oUCUFtqLc2qpAsxoBqr-JR9tRZTfz4ao8jZebU"}
+[info] 
+[info] To sign in to the Firebase CLI:
+[info] 
+[info] 1. Take note of your session ID:
+[info] 
+[info]    774BE
+[info] 
+[info] 2. Visit the URL below on any device and follow the instructions to get your code:
+[info] 
+[info]    https://auth.firebase.tools/login?code_challenge=Kn_dw3PR3MILyKB5w9-_zIh9VNt5kZPV-O1AQf2Yszg&session=774be413-9083-4395-84d3-67d48801f5f3&attest=DrU6-oUCUFtqLc2qpAsxoBqr-JR9tRZTfz4ao8jZebU
+[info] 
+[info] 3. Paste or enter the authorization code below once you have it:
+[info] 
+[debug] [2026-06-25T16:51:12.494Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (/Users/nikitamechkaev/.nvm/versions/node/v24.17.0/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:101:37)
+    at Interface.emit (node:events:509:28)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1327:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:284:20)
+    at ReadStream.emit (node:events:521:24)
+    at emitKeys (node:internal/readline/utils:371:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+    at ReadStream.emit (node:events:509:28)
+    at addChunk (node:internal/streams/readable:563:12)
+[error] 
+[error] Error: An unexpected error has occurred.

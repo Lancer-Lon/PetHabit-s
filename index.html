@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>PetHabit — твой питомец</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#007AFF"><link rel="stylesheet" href="css/styles.css">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<div class="phone" id="app-root">
+  <div id="onboarding-screen" class="onboarding">
+    <div class="pet-preview" id="preview-pet">🐥</div>
+    <h1>PetHabit</h1>
+    <p class="subtitle">Твой питомец ждёт тебя</p>
+    <div class="pet-color-selector" id="color-selector"></div>
+    <input type="text" class="name-input" id="pet-name-input" placeholder="Имя питомца" maxlength="12" value="Пиксель">
+    <div class="auth-buttons">
+      <button class="auth-btn google" id="google-login-btn"><span style="font-size:20px;">G</span> Войти через Google</button>
+      <button class="auth-btn apple" id="apple-login-btn"><span style="font-size:20px;"></span> Войти через Apple</button>
+    </div>
+    <button class="skip-btn" id="skip-auth-btn">Пропустить и играть офлайн</button>
+    <p class="auth-status">🔒 Вход сохранит прогресс в облаке</p>
+  </div>
+
+  <div id="main-app" style="display:none; flex-direction:column; flex:1;">
+    <div class="topbar">
+      <div class="row" style="gap:6px;">
+        <div class="stat">🔥 <span id="nav-streak">0</span></div>
+        <div class="stat">⭐ <span id="nav-level">1</span></div>
+        <div class="stat">💎 <span id="nav-gems">30</span></div>
+      </div>
+      <div class="row" style="gap:6px;">
+        <span id="cloud-status" class="cloud-badge" style="display:none;">☁️</span>
+        <span id="hardcore-badge" class="cloud-badge" style="display:none;color:var(--red);background:rgba(255,59,48,0.15);">⚡</span>
+        <div class="user-avatar" id="user-avatar-btn" title="Аккаунт">🐾</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="screen active" id="screen-home">
+        <div class="pet-stage">
+          <div style="position:relative;display:inline-block;">
+            <div class="pet-emoji" id="home-pet-emoji">🐥</div>
+            <div class="pet-accessory" id="pet-accessory-layer"></div>
+            <div id="hardcore-crown" style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:16px;display:none;"></div>
+          </div>
+          <h3 id="home-pet-name">Пиксель</h3>
+          <p class="muted" id="home-pet-status">😊 Счастлив</p>
+          <div class="pet-stats-row">
+            <div class="pet-stat-mini">❤️<div class="val" id="mini-health">100</div></div>
+            <div class="pet-stat-mini">⚡<div class="val" id="mini-energy">100</div></div>
+            <div class="pet-stat-mini">🍖<div class="val" id="mini-hunger">100</div></div>
+          </div>
+          <div class="progress-track" style="margin-top:12px;">
+            <div class="progress-fill" id="home-xp-bar" style="width:0%;"></div>
+          </div>
+          <p class="muted" style="font-size:10px;margin-top:4px;" id="home-xp-text">0 / 100 XP</p>
+          <div class="grid2" style="margin-top:12px;">
+            <button class="secondary" id="quick-pet" style="font-size:16px;">❤️ Гладить</button>
+            <button class="secondary" id="quick-feed" style="font-size:16px;">🍖 Кормить</button>
+            <button class="secondary" id="quick-play" style="font-size:16px;">⚽ Играть</button>
+            <button class="secondary" id="quick-sleep" style="font-size:16px;">😴 Спать</button>
+          </div>
+          <button id="hardcore-btn" class="secondary" style="width:100%;margin-top:8px;font-size:12px;">⚡ Режим испытания</button>
+        </div>
+
+        <button class="gold" id="daily-reward-btn" style="width:100%;margin-bottom:8px;">🎁 Ежедневная награда</button>
+        <div id="expedition-banner"></div>
+        <div id="weekly-goals"></div>
+
+        <div class="row" style="justify-content:space-between;margin-bottom:8px;">
+          <h2>Привычки</h2>
+          <button id="add-habit-btn" style="font-size:20px;padding:4px 12px;border-radius:999px;background:var(--accent-light);color:var(--accent);">+</button>
+        </div>
+        <div id="habit-list"></div>
+      </div>
+
+      <div class="screen" id="screen-world">
+        <h2>⚔️ Босс недели</h2>
+        <div id="boss-panel" class="boss-card"></div>
+        <button id="coop-btn" class="gold" style="width:100%;margin-bottom:10px;">🤝 Совместная охота</button>
+        <h2 style="margin-top:14px;">🗺 Экспедиции</h2>
+        <div class="grid2" id="expedition-options"></div>
+        <h2 style="margin-top:14px;">🏠 Дом питомца</h2>
+        <div class="grid2" id="furniture-display"></div>
+      </div>
+
+      <div class="screen" id="screen-shop">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="shop-tab">🛍️ Магазин</button>
+          <button class="tab-btn" data-tab="inventory-tab">🎒 Инвентарь</button>
+        </div>
+        <div id="shop-tab">
+          <h2>Аксессуары</h2>
+          <div class="grid2" id="shop-items"></div>
+          <h2 style="margin-top:12px;">Фоны</h2>
+          <div class="grid2" id="shop-bgs"></div>
+          <h2 style="margin-top:12px;">🏠 Мебель</h2>
+          <div class="grid2" id="shop-furniture"></div>
+        </div>
+        <div id="inventory-tab" style="display:none;">
+          <h2>Аксессуары</h2>
+          <div class="grid2" id="inv-items"></div>
+          <h2 style="margin-top:12px;">Фоны</h2>
+          <div class="grid2" id="inv-bgs"></div>
+          <h2 style="margin-top:12px;">Мебель</h2>
+          <div class="grid2" id="inv-furniture"></div>
+        </div>
+      </div>
+
+      <div class="screen" id="screen-stats">
+        <h2>Статистика</h2>
+        <div class="grid2">
+          <div class="stat-card"><div class="stat-value" style="color:var(--green);" id="stats-today">0</div><div class="stat-label">Сегодня</div></div>
+          <div class="stat-card"><div class="stat-value" style="color:var(--accent);" id="stats-week">0</div><div class="stat-label">За неделю</div></div>
+          <div class="stat-card"><div class="stat-value" style="color:var(--orange);" id="stats-streak">0</div><div class="stat-label">Стрик 🔥</div></div>
+          <div class="stat-card"><div class="stat-value" style="color:var(--purple);" id="stats-best">0</div><div class="stat-label">Лучший 🏆</div></div>
+        </div>
+        <h2 style="margin-top:20px;">📅 Тепловая карта (28 дней)</h2>
+        <div id="heatmap-container" style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px;"></div>
+        <h2 style="margin-top:20px;">🏆 Достижения</h2>
+        <div id="achievements-list"></div>
+        <p class="muted" style="text-align:center;margin-top:8px;">Разблокировано: <span id="ach-count">0</span>/12</p>
+        <h2 style="margin-top:16px;">Коллекция</h2>
+        <p class="muted">Собрано: <span id="collection-count">0</span>/16</p>
+        <div class="progress-track"><div class="progress-fill" id="collection-bar" style="width:0%;"></div></div>
+      </div>
+    </div>
+
+    <div class="bottomnav">
+      <button class="navbtn active" data-screen="home"><span class="ic">🏠</span>День</button>
+      <button class="navbtn" data-screen="world"><span class="ic">⚔️</span>Мир</button>
+      <button class="navbtn" data-screen="shop"><span class="ic">🛍️</span>Магазин</button>
+      <button class="navbtn" data-screen="stats"><span class="ic">🏆</span>Статы</button>
+    </div>
+  </div>
+</div>
+
+<!-- ИСПРАВЛЕНО: input-ы ВНЕ select -->
+<div class="modal-overlay" id="habit-modal" style="display:none;">
+  <div class="modal-sheet">
+    <h2 id="habit-modal-title">Новая привычка</h2>
+    <input type="text" id="habit-name-input" placeholder="Название" style="margin:12px 0;">
+    <input type="text" id="habit-emoji-input" placeholder="Эмодзи" maxlength="2" style="margin-bottom:12px;">
+    <select id="habit-category-input" style="margin-bottom:12px;">
+      <option value="strength">💪 Сила</option>
+      <option value="mind">🧠 Ум</option>
+      <option value="rest">😴 Отдых</option>
+    </select>
+    <input type="number" id="habit-target-input" placeholder="Цель (например 10)" style="margin-bottom:8px;">
+    <input type="text" id="habit-unit-input" placeholder="Единицы (раз, минут, стаканов)" style="margin-bottom:12px;">
+    <button id="save-habit-btn" style="width:100%;">Сохранить</button>
+    <button id="cancel-habit-btn" class="secondary" style="width:100%;margin-top:8px;">Отмена</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="daily-modal" style="display:none;">
+  <div class="modal-sheet" style="text-align:center;">
+    <h2>🎁 Ежедневная награда</h2>
+    <div id="daily-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:12px 0;"></div>
+    <button id="claim-daily-btn" style="width:100%;">Забрать</button>
+    <button id="close-daily-btn" class="secondary" style="width:100%;margin-top:8px;">Закрыть</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="ach-modal" style="display:none;">
+  <div class="modal-sheet" style="text-align:center;">
+    <div style="font-size:64px;" id="ach-modal-icon">🏆</div>
+    <h2 style="margin:8px 0;">Достижение открыто!</h2>
+    <h3 id="ach-modal-name"></h3>
+    <p class="muted" id="ach-modal-desc"></p>
+    <button id="close-ach-btn" class="gold" style="width:100%;margin-top:16px;">Круто! 🎉</button>
+  </div>
+</div>
+
+</html>

@@ -1,0 +1,126 @@
+// ==================== STATE MANAGEMENT ====================
+const state = {
+  player: {
+    xp: 0,
+    gems: 30,
+    streak: 0,
+    bestStreak: 0,
+    totalHabitsDone: 0,
+    totalDays: 0,
+    lastDailyClaim: null,
+    dailyStreak: 0,
+    todayDate: new Date().toISOString().split('T')[0],
+    heatmapData: Array(28).fill(false),
+    weekHistory: Array(7).fill(0),
+    userId: null,
+    isAnonymous: true,
+    doubleNextReward: false,
+    prestigeLevel: 0,
+  },
+  pet: {
+    name: 'Пиксель',
+    color: 'yellow',
+    health: 100,
+    energy: 100,
+    hunger: 100,
+    mood: 80,
+    deepSleep: false,
+    sleepHabitsNeeded: 0,
+  },
+  habits: {
+    list: [
+      { id: 1, name: 'Выпить стакан воды', icon: '💧', category: 'rest', done: false },
+      { id: 2, name: '10 минут чтения', icon: '📖', category: 'mind', done: false },
+      { id: 3, name: 'Прогулка 15 минут', icon: '🏃', category: 'strength', done: false },
+      { id: 4, name: 'Без телефона перед сном', icon: '🌙', category: 'rest', done: false },
+    ],
+    nextId: 5,
+    doneMap: {},
+    editingId: null,
+    swipedId: null,
+  },
+  world: {
+    currentBoss: null,
+    bossKills: 0,
+    activeExpedition: null,
+    furniture: [
+      { id: 'bed', name: 'Кровать', icon: '🛏️', cost: 30, owned: false, placed: false, 
+        bonus: { type: 'energy', value: 10, desc: '⚡ +10% энергии из сна' } },
+      { id: 'plant', name: 'Растение', icon: '🪴', cost: 15, owned: false, placed: false, 
+        bonus: { type: 'loot', value: 3, desc: '🎁 +3% шанс находок' } },
+      { id: 'painting', name: 'Картина', icon: '🖼️', cost: 20, owned: false, placed: false, 
+        bonus: { type: 'loot', value: 2, desc: '🎁 +2% шанс находок' } },
+      { id: 'rug', name: 'Коврик', icon: '🧶', cost: 25, owned: false, placed: false,
+        bonus: { type: 'energy', value: 5, desc: '⚡ +5% энергии из сна' } },
+      { id: 'bookshelf', name: 'Книжная полка', icon: '📚', cost: 35, owned: false, placed: false,
+        bonus: { type: 'xp', value: 10, desc: '⭐ +10% XP за привычки' } },
+      { id: 'lamp', name: 'Лампа', icon: '💡', cost: 20, owned: false, placed: false,
+        bonus: { type: 'mood', value: 15, desc: '😊 +15% настроения из действий' } },
+    ],
+  },
+  shop: {
+    accessories: [
+      { id: 'hat', name: 'Шапка', cost: 30, icon: '🎩', owned: false, equipped: false },
+      { id: 'glasses', name: 'Очки', cost: 50, icon: '🕶️', owned: false, equipped: false },
+      { id: 'bow', name: 'Бантик', cost: 20, icon: '🎀', owned: false, equipped: false },
+      { id: 'crown', name: 'Корона', cost: 100, icon: '👑', owned: false, equipped: false },
+    ],
+    backgrounds: [
+      { id: 'forest', name: 'Лес', cost: 40, icon: '🌳', owned: false, equipped: false },
+      { id: 'space', name: 'Космос', cost: 80, icon: '🌌', owned: false, equipped: false },
+      { id: 'beach', name: 'Пляж', cost: 60, icon: '🏖️', owned: false, equipped: false },
+    ],
+  },
+  achievements: {
+    unlocked: [],
+    list: [
+      { id: 'first_habit', icon: '✅', name: 'Первый шаг', desc: 'Выполнить первую привычку', check: s => s.player.totalHabitsDone >= 1 },
+      { id: 'streak_3', icon: '🔥', name: 'Три дня', desc: 'Стрик 3 дня', check: s => s.player.bestStreak >= 3 },
+      { id: 'streak_7', icon: '🔥', name: 'Неделя силы', desc: 'Стрик 7 дней', check: s => s.player.bestStreak >= 7 },
+      { id: 'streak_10', icon: '💪', name: 'Железная воля', desc: 'Стрик 10 дней', check: s => s.player.bestStreak >= 10 },
+      { id: 'habits_10', icon: '📋', name: 'Десятка', desc: '10 привычек', check: s => s.player.totalHabitsDone >= 10 },
+      { id: 'habits_50', icon: '🏅', name: 'Полтинник', desc: '50 привычек', check: s => s.player.totalHabitsDone >= 50 },
+      { id: 'habits_100', icon: '🏆', name: 'Сотня', desc: '100 привычек', check: s => s.player.totalHabitsDone >= 100 },
+      { id: 'boss_kill', icon: '⚔️', name: 'Убийца боссов', desc: 'Победить босса', check: s => s.world.bossKills >= 1 },
+      { id: 'boss_kill_3', icon: '🗡️', name: 'Охотник', desc: '3 босса', check: s => s.world.bossKills >= 3 },
+      { id: 'furniture_1', icon: '🪑', name: 'Новоселье', desc: 'Купить мебель', check: s => s.world.furniture.some(f => f.owned) },
+      { id: 'furniture_3', icon: '🏠', name: 'Дизайнер', desc: '3 мебели', check: s => s.world.furniture.filter(f => f.owned).length >= 3 },
+      { id: 'level_5', icon: '⭐', name: 'Расту', desc: '5 уровень', check: s => getLevel(s) >= 5 },
+    ],
+  },
+};
+
+function getLevel(s) {
+  let lvl = 1;
+  while (s.player.xp >= xpForLevel(lvl + 1)) lvl++;
+  return lvl;
+}
+function xpForLevel(lvl) {
+  return lvl <= 1 ? 0 : Math.floor(100 * Math.pow(1.15, lvl - 1));
+}
+function xpProgress(s) {
+  const lvl = getLevel(s);
+  const cur = xpForLevel(lvl);
+  const nxt = xpForLevel(lvl + 1);
+  const into = s.player.xp - cur;
+  return { lvl, pct: Math.min(100, Math.round((into / (nxt - cur)) * 100)), into, needed: nxt - cur, next: lvl + 1 };
+}
+
+const petColors = {
+  yellow: { emoji: '🐥', name: 'Жёлтый', rarity: 'Обычный', weight: 70 },
+  white: { emoji: '🐤', name: 'Белый', rarity: 'Необычный', weight: 20 },
+  black: { emoji: '🐧', name: 'Чёрный', rarity: 'Редкий', weight: 8 },
+  golden: { emoji: '🦅', name: 'Золотой', rarity: 'Легендарный', weight: 2 },
+};
+
+function generatePetColor() {
+  const rand = Math.random() * 100;
+  let cum = 0;
+  for (const [key, data] of Object.entries(petColors)) {
+    cum += data.weight;
+    if (rand <= cum) return key;
+  }
+  return 'yellow';
+}
+
+console.log('✅ State module loaded');
