@@ -6,7 +6,8 @@
 <title>PetHabit — твой питомец</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<meta name="theme-color" content="#007AFF"><link rel="stylesheet" href="css/styles.css">
+<meta name="theme-color" content="#007AFF">
+<link rel="stylesheet" href="css/styles.css">
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
@@ -142,7 +143,6 @@
   </div>
 </div>
 
-<!-- ИСПРАВЛЕНО: input-ы ВНЕ select -->
 <div class="modal-overlay" id="habit-modal" style="display:none;">
   <div class="modal-sheet">
     <h2 id="habit-modal-title">Новая привычка</h2>
@@ -151,7 +151,7 @@
     <select id="habit-category-input" style="margin-bottom:12px;">
       <option value="strength">💪 Сила</option>
       <option value="mind">🧠 Ум</option>
-      <option value="rest">😴 Сон</option>
+      <option value="rest">😴 Отдых</option>
     </select>
     <input type="number" id="habit-target-input" placeholder="Цель (например 10)" style="margin-bottom:8px;">
     <input type="text" id="habit-unit-input" placeholder="Единицы (раз, минут, стаканов)" style="margin-bottom:12px;">
@@ -179,4 +179,7 @@
   </div>
 </div>
 
+<script src="js/bundle.js"></script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js");}</script>
+</body>
 </html>
