@@ -2037,16 +2037,12 @@ let auth = null;
 let db = null;
 let firebaseReady = false;
 
-try {
-  firebase.initializeApp(firebaseConfig);
-  auth = firebase.auth();
-  db = firebase.firestore();
-  db.enablePersistence().catch(() => {});
-  firebaseReady = true;
-  console.log('✅ Firebase ready');
-} catch (e) {
-  console.warn('⚠️ Firebase not configured');
-}
+firebase.initializeApp(firebaseConfig);
+auth = firebase.auth();
+db = firebase.firestore();
+db.enablePersistence().catch(() => {});
+firebaseReady = true;
+console.log('✅ Firebase ready');
 
 // ЕДИНЫЙ ИСТОЧНИК ИСТИНЫ для авторизации
 function signInWithGoogle() {
