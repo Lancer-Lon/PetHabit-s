@@ -1,5 +1,5 @@
 // ==================== STATE MANAGEMENT ====================
-const state = {
+window.state = {
   player: {
     xp: 0,
     gems: 30,
