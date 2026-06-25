@@ -873,52 +873,6 @@ function spawnConfetti() {
 }
 function checkMilestoneConfetti() { if (state.player.streak > 0 && state.player.streak % 7 === 0) { spawnConfetti(); showToast(`🔥 Стрик ${state.player.streak} дней!`); } }
 console.log('✅ Confetti module loaded');
-// ==================== FIREBASE MODULE (FIXED) ====================
-const firebaseConfig = {
-  apiKey: "AIzaSyBU5jbR8af_Fh-RTj7JsZQ1OSFyhnnx5YM",
-  authDomain: "pethabit-77373.firebaseapp.com",
-  projectId: "pethabit-77373",
-  storageBucket: "pethabit-77373.firebasestorage.app",
-  messagingSenderId: "210388751632",
-  appId: "1:210388751632:web:dc78a9fd1014e118978195",
-  measurementId: "G-1FNG89BDQK"
-};
-
-firebase.initializeApp(firebaseConfig);
-var auth = firebase.auth();
-var db = firebase.firestore();
-var firebaseReady = true;
-console.log('✅ Firebase ready');
-
-function signInWithGoogle() {
-  var provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(function(e) { showToast('Ошибка: ' + e.message); });
-}
-
-function signInWithApple() {
-  var provider = new firebase.auth.OAuthProvider('apple.com');
-  provider.addScope('email'); provider.addScope('name');
-  auth.signInWithPopup(provider).catch(function(e) { showToast('Ошибка: ' + e.message); });
-}
-
-async function onUserLoggedIn(user) {
-  state.player.userId = user.uid;
-  state.player.isAnonymous = false;
-  updateCloudStatus();
-  startApp();
-}
-
-async function loadFromCloud(uid) { return null; }
-
-async function saveToCloud() {
-  if (!firebaseReady || !state.player.userId) return;
-  db.collection('users').doc(state.player.userId).set({
-    state: JSON.parse(JSON.stringify(state)),
-    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-  }, { merge: true }).catch(function(){});
-}
-
-console.log('✅ Firebase module loaded');
 // ==================== APP CORE ====================
 let stateDirty = false;
 function renderAll() { refreshTopbar(); updateAllPetUI(); renderHabits(); renderShop(); renderInventory(); renderBoss(); renderExpeditionBanner(); renderExpeditionOptions(); renderFurniture(); renderAchievements(); updateStatsUI(); updateCollectionUI(); }
