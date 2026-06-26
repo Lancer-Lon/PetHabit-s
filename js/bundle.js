@@ -24,6 +24,13 @@ function getLevel(s) { let l = 1; while (s.player.xp >= xpForLevel(l + 1)) l++; 
 function xpForLevel(l) { return l <= 1 ? 0 : Math.floor(100 * Math.pow(1.15, l - 1)); }
 const petColors = { yellow: { emoji: '🐥', name: 'Жёлтый', weight: 70 }, white: { emoji: '🐤', name: 'Белый', weight: 20 }, black: { emoji: '🐧', name: 'Чёрный', weight: 8 }, golden: { emoji: '🦅', name: 'Золотой', weight: 2 } };
 function generatePetColor() { const r = Math.random() * 100; let c = 0; for (const [k, d] of Object.entries(petColors)) { c += d.weight; if (r <= c) return k; } return 'yellow'; }
+function xpProgress(s) {
+  const lvl = getLevel(s);
+  const cur = xpForLevel(lvl);
+  const nxt = xpForLevel(lvl + 1);
+  const into = s.player.xp - cur;
+  return { lvl, pct: Math.min(100, Math.round((into / (nxt - cur)) * 100)), into, needed: nxt - cur, next: lvl + 1 };
+}
 // ==================== EVENT SYSTEM ====================
 const eventBus = {
   _listeners: {},
@@ -1654,6 +1661,9 @@ function endTutorial() {
   state.player.tutorialCompleted = true;
   saveGame();
   showToast('🎉 Ты готов! Начни с первой привычки.');
+}
+
+  50% { box-shadow: 0 0 0 12px rgba(0,122,255,0); }
 }
 
 console.log('✅ Tutorial module loaded');
