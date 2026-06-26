@@ -112,8 +112,6 @@ function endTutorial() {
   showToast('🎉 Ты готов! Начни с первой привычки.');
 }
 
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0,122,255,0.3); }
   50% { box-shadow: 0 0 0 12px rgba(0,122,255,0); }
 }
 
