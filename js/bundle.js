@@ -506,7 +506,7 @@ function incrementHabit(id) {
     
     // Лут при завершении
     const loot = checkRandomLoot();
-    if (loot) { saveGame(); return; }
+    if (loot) { saveGame(); }
     
     checkAllDone();
   } else {
@@ -553,7 +553,7 @@ function toggleHabit(id) {
 
   if (state.habits.list.length <= 7 && Math.random() < 0.15) {
     const loot = checkRandomLoot();
-    if (loot) { saveGame(); return; }
+    if (loot) { saveGame(); }
   }
 
   checkAllDone(wasAllDone);
@@ -1756,11 +1756,6 @@ function endTutorial() {
   showToast('🎉 Ты готов! Начни с первой привычки.');
 }
 
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0,122,255,0.3); }
-  50% { box-shadow: 0 0 0 12px rgba(0,122,255,0); }
-}
-
 console.log('✅ Tutorial module loaded');
 // ==================== HEATMAP MODULE ====================
 function renderHeatmap() {
@@ -2151,7 +2146,7 @@ function loadGame() {
       state.pet = data.state.pet || state.pet;
       state.world = data.state.world || state.world;
       state.shop = data.state.shop || state.shop;
-      state.achievements = data.state.achievements || state.achievements;
+      if (data.state.achievements) { state.achievements.unlocked = data.state.achievements.unlocked || []; }
     }
 
     if (data.shopItems) {
