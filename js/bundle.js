@@ -1656,9 +1656,6 @@ function endTutorial() {
   showToast('🎉 Ты готов! Начни с первой привычки.');
 }
 
-  50% { box-shadow: 0 0 0 12px rgba(0,122,255,0); }
-}
-
 console.log('✅ Tutorial module loaded');
 // ==================== HEATMAP MODULE ====================
 function renderHeatmap() {
